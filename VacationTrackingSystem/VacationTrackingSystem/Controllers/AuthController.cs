@@ -53,7 +53,7 @@ namespace VacationTrackingSystem.Controllers
                 var authManager = ctx.Authentication;
 
                 authManager.SignIn(identity);
-                return Redirect("Home/Index");
+                return RedirectToAction("Index","Home");
         }
         public ActionResult LogOut()
         {

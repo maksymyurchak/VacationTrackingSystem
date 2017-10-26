@@ -10,6 +10,7 @@ using AutoMapper;
 using Models.Entities;
 using Models.Entities.Enums;
 using Models.ModelsVM;
+using System.Data.Objects.SqlClient;
 
 namespace BAL.Managers
 {
@@ -25,7 +26,7 @@ namespace BAL.Managers
             vacationToEntity.Status = Status.InQueue;
             var infoAboutVacation = uow.UserRepo.Get(includeProperties: "InfoAboutVacation").Select(s => s.InfoAboutVacation).FirstOrDefault(w => w.UserId == vacation.UserId);
             var days = (vacation.EndDate - vacation.StartDate).Days ==0 ? 1 : (vacation.EndDate - vacation.StartDate).Days;
-            //also can use reflection instead of if
+            //also can use reflection instead of that
             if (vacation.VacationType == VacationType.PaidDayOffs)
             {
                 if(infoAboutVacation.PaidDayOffs - days<0)
@@ -54,8 +55,8 @@ namespace BAL.Managers
                     }
                 }
             }
-            var checkVacationInThisPeriod = uow.VacationRequestRepo.All.Where(s => s.StartDate > vacation.StartDate && s.EndDate < vacation.EndDate).Count();
-            if (checkVacationInThisPeriod > 0)
+            var checkVacationInThisPeriod = uow.VacationRequestRepo.All.Where(s => vacation.StartDate >= s.StartDate && vacation.EndDate <= s.EndDate && s.UserId == vacation.UserId);
+            if (checkVacationInThisPeriod.Count() > 0)
             {
                 return false;
             }

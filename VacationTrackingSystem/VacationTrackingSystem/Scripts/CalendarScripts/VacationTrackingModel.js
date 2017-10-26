@@ -72,7 +72,8 @@
                         id: data[i].Id,
                         type: data[i].VacationType,
                         startDate: new Date(data[i].StartDate),
-                        endDate: new Date(data[i].EndDate)
+                        endDate: new Date(data[i].EndDate),
+                        name: data[i].UserName
                     };
                     dataCalendar.push(vacationRecordEvent);
                     self.vacationsForManager.push(vacationRecordEvent);
@@ -173,6 +174,7 @@ function saveEvent() {
         id: $('#event-modal input[name="event-index"]').val(),
         name: $("#username").val(),
         type: $(".policies").val(),
+        status:"InQueue",
         startDate: $('#event-modal input[name="event-start-date"]').datepicker('getDate'),
         endDate: $('#event-modal input[name="event-end-date"]').datepicker('getDate')
     }
@@ -180,7 +182,8 @@ function saveEvent() {
         VacationType: $(".policies").val(),
         StartDate: $('#event-modal input[name="event-start-date"]').datepicker({ dateFormat: 'dd-mm-yy' }).val(),
         EndDate: $('#event-modal input[name="event-end-date"]').datepicker({ dateFormat: 'dd-mm-yy' }).val(),
-        Id: $('#event-modal input[name="event-index"]').val()
+        Id: $('#event-modal input[name="event-index"]').val(),
+        UserName: $("#username").val(),
     };
     var path = "api/Vacation/CreateVacation";
     $.ajax({
@@ -189,10 +192,11 @@ function saveEvent() {
         data: request,
         success: function (data) {
             console.log(data);
+            $('#calendar').data('calendar').getDataSource();
         },
         error: function (data) {
             $('#event-modal').modal('hide');
-            alert("OO troubles");
+            console.log(data);
         }
 
     })
@@ -253,7 +257,7 @@ $(function () {
                 for (var i in e.events) {
                     content += '<div class="event-tooltip-content">'
                         + '<div class="event-name" style="color:' + e.events[i].color + '">' + e.events[i].name + '</div>'
-                        + '<div class="event-location">' + e.events[i].location + '</div>'
+                        + '<div class="event-location">' + e.events[i].status + '</div>'
                         + '</div>';
                 }
 

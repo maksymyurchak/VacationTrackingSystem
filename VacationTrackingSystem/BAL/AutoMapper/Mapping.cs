@@ -15,12 +15,14 @@ namespace BAL.AutoMapper
     {
         public Mapping()
         {
-            CreateMap<VacationRequestDTO, VacationRequest>();
+            CreateMap<VacationRequestDTO, VacationRequest>().
+            ForMember(vd => vd.Name, vb => vb.MapFrom(f => f.UserName)); 
             CreateMap<UserDTO, User>();
             CreateMap<User, UserDTO>();
             CreateMap<VacationRequest, VacationRequestDTO>().
                 ForMember(vd => vd.Status, vb => vb.MapFrom(f => Enum.GetName(typeof(Status), f.Status))).
-                ForMember(vd => vd.VacationType, vb => vb.MapFrom(f => Enum.GetName(typeof(VacationType), f.VacationType)));
+                ForMember(vd => vd.VacationType, vb => vb.MapFrom(f => Enum.GetName(typeof(VacationType), f.VacationType))).
+                ForMember(vd => vd.UserName, vb => vb.MapFrom(f => f.Name));
 
 
         }

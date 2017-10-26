@@ -202,6 +202,7 @@
     <Compile Include="Controllers\Api\ManagerController.cs" />
     <Compile Include="Controllers\Api\PolicyController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
+    <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\VacationController.cs" />
