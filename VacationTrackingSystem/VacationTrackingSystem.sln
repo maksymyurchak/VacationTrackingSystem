@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{B6C22FEC-B0FF-464B-AF0B-7D1756CD5DA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A315B477-2BE5-4843-9193-14D27231A5CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BAL", "BAL\BAL.csproj", "{3BBFC414-3727-45EB-BAFC-6D451BF76D9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacationTrackingSystem", "VacationTrackingSystem\VacationTrackingSystem.csproj", "{4B8C358C-C9A4-49E4-B904-C8175246F1EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6C22FEC-B0FF-464B-AF0B-7D1756CD5DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6C22FEC-B0FF-464B-AF0B-7D1756CD5DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6C22FEC-B0FF-464B-AF0B-7D1756CD5DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6C22FEC-B0FF-464B-AF0B-7D1756CD5DA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A315B477-2BE5-4843-9193-14D27231A5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A315B477-2BE5-4843-9193-14D27231A5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A315B477-2BE5-4843-9193-14D27231A5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A315B477-2BE5-4843-9193-14D27231A5CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BBFC414-3727-45EB-BAFC-6D451BF76D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BBFC414-3727-45EB-BAFC-6D451BF76D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BBFC414-3727-45EB-BAFC-6D451BF76D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BBFC414-3727-45EB-BAFC-6D451BF76D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B8C358C-C9A4-49E4-B904-C8175246F1EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B8C358C-C9A4-49E4-B904-C8175246F1EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B8C358C-C9A4-49E4-B904-C8175246F1EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B8C358C-C9A4-49E4-B904-C8175246F1EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B521CA5-CF6D-46E4-9C34-3B7A98E31E52}
+	EndGlobalSection
+EndGlobal
