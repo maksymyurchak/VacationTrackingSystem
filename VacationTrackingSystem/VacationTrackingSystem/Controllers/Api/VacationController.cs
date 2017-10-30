@@ -46,7 +46,7 @@ namespace VacationTrackingSystem.Controllers.Api
                 }
                 else
                 {
-                    return Ok("already exist vacation in there dates");
+                    return Ok("already exist vacation in these dates");
                 }
             }
             catch(Exception e)
@@ -73,7 +73,7 @@ namespace VacationTrackingSystem.Controllers.Api
                         EndDate = vac.EndDate,
                         VacationType = vac.VacationType,
                         UserId = vac.UserId,
-                        Staus = vac.Status
+                        Status = vac.Status
                     };
                     result.Add(vacVm);
                 }

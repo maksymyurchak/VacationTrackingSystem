@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace VacationTrackingSystem.Controllers.Api
@@ -44,6 +45,15 @@ namespace VacationTrackingSystem.Controllers.Api
                 return NotFound();
             }
             
+        }
+        [HttpGet]
+        [Route("api/User/CheckRole")]
+        public string CheckRole()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            var role = identity.Claims.Where(c => c.Type == ClaimTypes.Role)
+                   .Select(c => c.Value).SingleOrDefault();
+            return role;
         }
     }
 

@@ -21,5 +21,17 @@ namespace VacationTrackingSystem.Controllers.Api
             var result = _policyManager.GetPolicies();
             return Ok(result);
         }
+
+        [HttpPost]
+        [Route("api/auth/testclaims")]
+        [Authorize]
+        public string TestClaims()
+        {
+            // string from claims
+            string data = "Hey team";
+            return data;
+        }
     }
+
+   
 }

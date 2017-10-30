@@ -9,7 +9,29 @@
     self.isEmployee = ko.observable(false);
     //var holidays = ko.observableArray();
     self.GetUser = function () {
-
+        $.ajax({
+            type: "GET",
+            url: "api/User/CheckRole",
+            success: function (data) {
+                if (data == "Manager") {
+                    self.isManager(true);
+                    self.isHR(false);
+                    self.isEmployee(false);
+                }
+                if (data == "HumanResources") {
+                    self.isManager(false);
+                    self.isHR(true);
+                    self.isEmployee(false);
+                }
+                if (data == "Employee") {
+                    self.isManager(false);
+                    self.isHR(false);
+                    self.isEmployee(true);
+                }
+            },
+            error: function (data) {
+            }
+        });
     }
     self.CreateUser = function () {
         var user = {
@@ -26,7 +48,14 @@
             data:user,
             url: "api/User/CreateUser",
             success: function (data) {
-                self.CloseCreateUserModal();
+                if (data == "User with this email exist") {
+                    alert("user exist with the same email");
+                }
+                else {
+                    alert("user Created");
+                    self.CloseCreateUserModal();
+                }
+               
             },
             error: function (data) {
             }
@@ -80,11 +109,10 @@
 
                 }
                 $('#calendar').data('calendar').setDataSource(dataCalendar);
-                console.log(data);
+                //console.log(data);
             },
             error: function (data) {
                 $('#event-modal').modal('hide');
-                alert("O_o troubles o_O");
             }
         });
     }
@@ -150,7 +178,7 @@
 function editEvent(event) {
     $('#event-modal input[name="event-index"]').val(event ? event.id : '');
     $('#event-modal input[name="event-name"]').val(event ? event.name : '');
-    $('#event-modal input[name="event-location"]').val(event ? event.type : '');
+    $('#event-modal input[name="event-status"]').val(event ? event.status : '');
     $('#event-modal input[name="event-start-date"]').datepicker('update', event ? event.startDate : '');
     $('#event-modal input[name="event-end-date"]').datepicker('update', event ? event.endDate : '');
     $('#event-modal').modal();
@@ -191,8 +219,15 @@ function saveEvent() {
         url: appPath + path,
         data: request,
         success: function (data) {
-            console.log(data);
-            $('#calendar').data('calendar').getDataSource();
+            if (data =="already exist vacation in these dates") {
+                event = null;
+                alert("there are vacations with these dates");
+            }
+            else {
+                dataSource.push(event);
+                $('#calendar').data('calendar').setDataSource(dataSource);
+                $('#calendar').data('calendar').getDataSource();
+            }
         },
         error: function (data) {
             $('#event-modal').modal('hide');
@@ -206,7 +241,7 @@ function saveEvent() {
         for (var i in dataSource) {
             if (dataSource[i].id == event.id) {
                 dataSource[i].name = event.name;
-                dataSource[i].type = event.type;
+                dataSource[i].status = event.status;
                 dataSource[i].startDate = event.startDate;
                 dataSource[i].endDate = event.endDate;
             }
@@ -223,12 +258,11 @@ function saveEvent() {
         newId++;
         event.id = newId;
 
-        dataSource.push(event);
+       //dataSource.push(event);
     }
-
-     $('#calendar').data('calendar').setDataSource(dataSource);
+   // $('#calendar').data('calendar').setDataSource(dataSource);
     $('#event-modal').modal('hide');
-    self.GetAllVacationsRequests();
+    //self.GetAllVacationsRequests();
 }
 
 $(function () {
@@ -255,9 +289,11 @@ $(function () {
                 var content = '';
 
                 for (var i in e.events) {
+                    if (e.events[i].status == "undefined")
+                        console.log(e.events[i]);
                     content += '<div class="event-tooltip-content">'
                         + '<div class="event-name" style="color:' + e.events[i].color + '">' + e.events[i].name + '</div>'
-                        + '<div class="event-location">' + e.events[i].status + '</div>'
+                        + '<div class="event-location">' +e.events[i].status + '</div>'
                         + '</div>';
                 }
 
@@ -282,10 +318,10 @@ $(function () {
         dataSource: [
             {
                 id: 0,
-                name: 'Google I/O',
-                location: 'San Francisco, CA',
-                startDate: new Date(currentYear, 4, 28),
-                endDate: new Date(currentYear, 4, 29)
+                name: 'New Year',
+                location: 'Chernivtsi',
+                startDate: new Date(currentYear, 01, 01),
+                endDate: new Date(currentYear, 01, 01)
             }
         ]
     });
@@ -293,6 +329,7 @@ $(function () {
     vacationViewModel.GetAllVacationsRequests();
     vacationViewModel.GetUserRoles();
     vacationViewModel.GetPolicies();
+    vacationViewModel.GetUser();
     $('#save-event').click(function () {
         saveEvent();
     });

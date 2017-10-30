@@ -15,6 +15,6 @@ namespace Models.ModelsVM
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public long UserId { get; set; }
-        public string Staus { get; set; }
+        public string Status { get; set; }
     }
 }
