@@ -21,6 +21,7 @@ namespace VacationTrackingSystemTest
         [Fact]
         public void BasicTest()
         {
+            //Arrange
             AutoMapperConfig.Configure();
             var vacationRepo = new Mock<IGenericRepository<VacationRequest>>();
             var uow = new Mock<IUnitOfWork>();
@@ -47,8 +48,12 @@ namespace VacationTrackingSystemTest
             };
             listVacations.Add(vacationRequest);
             listVacations.Add(vacationRequest2);
+
+            //Act
             vacationRepo.Setup(x => x.All).Returns(listVacations.AsQueryable());
             var result =  vacManager.GetAllVacations();
+
+            //Assert
             Assert.Equal(result.FirstOrDefault().Status, Status.InQueue.ToString());
 
         }
